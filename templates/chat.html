@@ -281,7 +281,7 @@
   <div class="container">
     <div class="container-header">
       <h3 class=" text-left"> {{ user_data["username"] }}</h3>
-      <h3 class=" text-center">Fauna Chat</h3>
+      <h3 class=" text-center">Chat</h3>
       <h3 class=" text-right">{{ user_data["email"] }}</h3>
     </div>
     <div class="messaging">
@@ -374,34 +374,35 @@
   <script type="text/javascript">
 
     // THIS FUNCTION SHOULD SCROLL DOWN AUTOMATICALLY
-    //let scrollingElement = (document.scrollingElement || document.body)
-    // let msgH = document.querySelectorAll(".msg_history > div"), CurrentLen;
-    // let init = () => {
-    //   CurrentLen = msgH.length;
-    // }
-    // init();
-    // let validatePosition = () => {
-    //   if (msgH.length === CurrentLen) {
-    //     msgH[msgH.length - 1].setAttribute("id", "last_message");
-    //     for (var i; i < msgH.length; i++) {
-    //       if (msgH[i].id === "last_message" && msgH[i] !== msgH.length - 1) {
-    //         msgH[i].removeAttribute("id");
-    //         msgH[msgH.length - 1].setAttribute("id", "last_message");
-    //       }
-    //     }
-    //   }
-    // }
-    // let scrollDown = () => {
-    //   //scrollingElement.scrollTop = scrollingElement.scrollHeight;
-    //   //$container.animate({ scrollTop: $container[0].scrollHeight }, "slow");
-    //   validatePosition();
-    //   location.href = "#last_message";
-    //   init();
-    // }
+    let scrollingElement = (document.scrollingElement || document.body)
+    let msgH = document.querySelectorAll(".msg_history > div"), CurrentLen;
+    let init = () => {
+      CurrentLen = msgH.length;
+    }
+    init();
+    let validatePosition = () => {
+      if (msgH.length === CurrentLen) {
+        msgH[msgH.length - 1].setAttribute("id", "last_message");
+        for (var i; i < msgH.length; i++) {
+          if (msgH[i].id === "last_message" && msgH[i] !== msgH.length - 1) {
+            msgH[i].removeAttribute("id");
+            msgH[msgH.length - 1].setAttribute("id", "last_message");
+          }
+        }
+      }
+    }
+    let scrollDown = () => {
+      //scrollingElement.scrollTop = scrollingElement.scrollHeight;
+      //$container.animate({ scrollTop: $container[0].scrollHeight }, "slow");
+      validatePosition();
+      location.href = "#last_message";
+      init();
+    }
+
     // YOUR SOCKET CODE
     socket = io()
     socket.connect('https://' + document.domain + ':' + location.port + '/?rid=' + '{{ room_id }}');
-    //scrollDown()
+    scrollDown()
     socket.on('connect', function () {
       socket.emit('join-chat', {
         rid: '{{ room_id }}'
@@ -420,7 +421,7 @@
         message: user_input,
         rid: '{{ room_id }}'
       })
-      //scrollDown();
+      scrollDown();
       $('div.msg_history').append(`
             <div class="outgoing_msg">
               <div class="sent_msg">
@@ -430,7 +431,7 @@
           `)
       document.getElementById("last-message").innerHTML = user_input
       $('input.message').val('').focus()
-      //  scrollDown();
+       scrollDown();
     })
     socket.on('message', function (msg) {
       $('div.msg_history').append(`<div class="incoming_msg">
@@ -441,7 +442,7 @@
                   <span class="time_date"> 11:01 AM    |    June 9</span></div>
               </div>
             </div>`)
-      //  scrollDown();
+       scrollDown();
       document.getElementById("last-message").innerHTML = msg.message
     })
 
