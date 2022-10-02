@@ -5,8 +5,8 @@
 * `python main.py`
 
 ## Credits
-* This project is an implemetation of the source code provided at https://github.com/Bamimore-Tomi/fauna-chat 
-* https://dev.to/bamimoretomi/building-instant-messaging-app-with-flask-socketio-and-fauna-3pj1
+* This project is an implemetation of the source code provided at: https://github.com/Bamimore-Tomi/fauna-chat 
+* More help on making your own chat app can be found at: https://dev.to/bamimoretomi/building-instant-messaging-app-with-flask-socketio-and-fauna-3pj1
 * My contributions include setting up the Fauna database, linking with the database, and changing some of the source code to make it all work, using Heroku to make a web app. which can be acessed at https://aliklairchatapp.herokuapp.com/. and finally using https://appmaker.xyz/web2desk# to make a desktop app that launches the web app in native window in 3 opereating systems - Linux, Windows, Mac. which can be downloaded from the url: https://appmaker.xyz/web2desk/download/E2tHA7lH1zF9jwQBuS51
 ## Description
 * This is a simple web application that allows chatting between 2 parties.
