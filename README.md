@@ -10,7 +10,7 @@
 ## Credits
 * This project is an implemetation of the source code provided at: https://github.com/Bamimore-Tomi/fauna-chat 
 * More help on making your own chat app can be found at: https://dev.to/bamimoretomi/building-instant-messaging-app-with-flask-socketio-and-fauna-3pj1
-* My contributions include setting up the Fauna database, linking with the database, and changing some of the source code to make it all work, using Heroku to make a web app. and finally using https://appmaker.xyz/web2desk# to make a desktop app that launches the web app in native window in 3 opereating systems - Linux, Windows, Mac.
+* My contributions include setting up the Fauna database, linking with the database, and changing some of the source code to make it all work, using Heroku to deploy the web app. and finally using https://appmaker.xyz/web2desk# to make a desktop app that launches the web app in native window in 3 opereating systems - Linux, Windows, Mac.
 ## Description
 * This is a simple web application that allows chatting between 2 parties.
 * The index page allows sign up and login. anyone can sign up as long as the username is not already registered (the user is redirected to the sign up page again). All the data is stored in the Fauna DB's free server. but the password is stored as a hash.
