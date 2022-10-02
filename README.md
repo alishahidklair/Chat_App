@@ -19,4 +19,4 @@
 * Then messages can be sent back and forth between the two users. Message history is saved in the DB and is displayed and the message box is auto scrolled after every new message. The inbox also show the most recent message under the username.
 
 ## Troubleshooting Console App
-* In case of errors relating to evenlet try using python version 3.7 or lower.
+* In case of errors relating to `evenlet` try using python version 3.7 or lower.
