@@ -1,8 +1,8 @@
 # A simple chat application using flask and fauna
 
 ## How to run
-* `Web App: https://aliklairchatapp.herokuapp.com/`
-* `Desktop App: https://appmaker.xyz/web2desk/download/E2tHA7lH1zF9jwQBuS51 - Linux, Windows, Mac`
+* Web App: https://aliklairchatapp.herokuapp.com/
+* Desktop App: https://appmaker.xyz/web2desk/download/E2tHA7lH1zF9jwQBuS51 - Linux, Windows, Mac
 * `Console:`
 *   `pip install requirements.txt`
 *   `python main.py`
