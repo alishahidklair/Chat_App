@@ -1,6 +1,6 @@
 # A simple chat application using Flask and Fauna DB 
 
-## video demo:
+* video demo:
 
 ## How to run
 * Web App: https://aliklairchatapp.herokuapp.com/
