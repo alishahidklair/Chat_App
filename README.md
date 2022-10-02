@@ -1,4 +1,4 @@
-# A simple chat application using flask and fauna
+# A simple chat application using Flask and Fauna DB 
 
 ## How to run
 * Web App: https://aliklairchatapp.herokuapp.com/
