@@ -3,7 +3,7 @@
 ## How to run
 * Web App: https://aliklairchatapp.herokuapp.com/
 * Desktop App: https://appmaker.xyz/web2desk/download/E2tHA7lH1zF9jwQBuS51 - Linux, Windows, Mac
-* `Console:`
+* Console App:
 *   `pip install requirements.txt`
 *   `python main.py`
 
@@ -17,3 +17,6 @@
 * The login page take email and password inputs from the user and redirects to the chat page. If both email and passord match.
 * The chat page offers a basic chat UI. Which allows new chats to be started using the New Chat button and providing an email. If the email exists a new chat is created in the inbox.
 * Then messages can be sent back and forth between the two users. Message history is saved in the DB and is displayed and the message box is auto scrolled after every new message. The inbox also show the most recent message under the username.
+
+## Troubleshooting Console App
+* In case of errors relating to evenlet try using python version 3.7 or lower.
