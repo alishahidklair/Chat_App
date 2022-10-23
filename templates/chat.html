@@ -445,7 +445,7 @@
             </div>`)
        scrollDown();
       document.getElementById("last-message").innerHTML = msg.message
-      //
+      // js for notifications (works on chrome and edge only.)
       let permission = Notification.permission;
       if(permission === "granted") {
         showNotification();
