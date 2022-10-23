@@ -414,6 +414,7 @@
     var form = $('#chat_form').on('submit', function (e) {
       e.preventDefault()
       let user_input = $('input.message').val()
+      console.log("yes")
       socket.emit('outgoing', {
         timestamp: Date.now() / 1000,
         sender_username: "{{ user_data['username'] }}",
@@ -435,7 +436,7 @@
     })
     socket.on('message', function (msg) {
       $('div.msg_history').append(`<div class="incoming_msg">
-      <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+              <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
               <div class="received_msg">
                 <div class="received_withd_msg">
                   <p>${msg.message}</p>
@@ -444,6 +445,40 @@
             </div>`)
        scrollDown();
       document.getElementById("last-message").innerHTML = msg.message
+      //
+      let permission = Notification.permission;
+      if(permission === "granted") {
+        showNotification();
+      } else if(permission === "default"){
+        requestAndShowPermission();
+      } else {
+        alert("Use normal alert");
+      }
+
+      function showNotification() {
+        if(document.visibilityState === "visible") {
+          return;
+        }
+        var title = "JaveScript Jeep";
+        icon = "image-url"
+        var body = "Message to be displayed";
+        var notification = new Notification('Title', { body, icon});
+        notification.onclick = () => {
+          notification.close();
+          window.parent.focus();
+        }
+      }
+
+      function requestAndShowPermission() {
+        Notification.requestPermission(function (permission) {
+          if (permission === "granted") {
+            showNotification();
+          }
+        });
+      }
+
+
+      //
     })
 
   </script>
