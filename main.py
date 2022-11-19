@@ -11,6 +11,9 @@ from flask import (
     url_for,
     session,
     Response,
+    make_response,
+    send_from_directory
+
 )
 from flask_socketio import SocketIO, join_room
 from faunadb import query as q
@@ -35,6 +38,23 @@ def login_required(f):
         return f(*args, **kwargs)
 
     return decorated
+
+
+
+@app.route('/manifest.json')
+def manifest():
+    return send_from_directory('static', 'manifest.json')
+
+
+@app.route('/sw.js')
+def service_worker():
+    response = make_response(send_from_directory('static', 'sw.js'))
+    response.headers['Cache-Control'] = 'no-cache'
+    return response
+
+
+
+
 
 
 # Index route, this route redirects to login/register page
@@ -291,4 +311,4 @@ def chatting_event(json, methods=["GET", "POST"]):
 
 
 if __name__ == "__main__":
-    socketio.run(app, debug=True)
+    socketio.run(app, port=3000, debug=True)
