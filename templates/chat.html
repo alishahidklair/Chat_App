@@ -281,7 +281,7 @@
   <div class="container">
     <div class="container-header">
       <h3 class=" text-left"> {{ user_data["username"] }}</h3>
-      <h3 class=" text-center">Chat</h3>
+      <h3 class=" text-center">Chat{{room_id}}</h3>
       <h3 class=" text-right">{{ user_data["email"] }}</h3>
     </div>
     <div class="messaging">
@@ -373,36 +373,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.js"></script>
   <script type="text/javascript">
 
-    // THIS FUNCTION SHOULD SCROLL DOWN AUTOMATICALLY
-    let scrollingElement = (document.scrollingElement || document.body)
-    let msgH = document.querySelectorAll(".msg_history > div"), CurrentLen;
-    let init = () => {
-      CurrentLen = msgH.length;
-    }
-    init();
-    let validatePosition = () => {
-      if (msgH.length === CurrentLen) {
-        msgH[msgH.length - 1].setAttribute("id", "last_message");
-        for (var i; i < msgH.length; i++) {
-          if (msgH[i].id === "last_message" && msgH[i] !== msgH.length - 1) {
-            msgH[i].removeAttribute("id");
-            msgH[msgH.length - 1].setAttribute("id", "last_message");
-          }
-        }
-      }
-    }
-    let scrollDown = () => {
-      //scrollingElement.scrollTop = scrollingElement.scrollHeight;
-      //$container.animate({ scrollTop: $container[0].scrollHeight }, "slow");
-      validatePosition();
-      location.href = "#last_message";
-      init();
-    }
-
     // YOUR SOCKET CODE
     socket = io()
     socket.connect('https://' + document.domain + ':' + location.port + '/?rid=' + '{{ room_id }}');
-    scrollDown()
+    console.log("socket connected")
+    // scrollDown()
     socket.on('connect', function () {
       socket.emit('join-chat', {
         rid: '{{ room_id }}'
@@ -432,7 +407,7 @@
           `)
       document.getElementById("last-message").innerHTML = user_input
       $('input.message').val('').focus()
-       scrollDown();
+      scrollDown();
     })
     socket.on('message', function (msg) {
       $('div.msg_history').append(`<div class="incoming_msg">
@@ -443,42 +418,10 @@
                   <span class="time_date"> 11:01 AM    |    June 9</span></div>
               </div>
             </div>`)
-       scrollDown();
+      scrollDown();
       document.getElementById("last-message").innerHTML = msg.message
-      // js for notifications (works on chrome and edge only.)
-      let permission = Notification.permission;
-      if(permission === "granted") {
-        showNotification();
-      } else if(permission === "default"){
-        requestAndShowPermission();
-      } else {
-        alert("Use normal alert");
-      }
+      showNotification(msg.message)
 
-      function showNotification() {
-//         if(document.visibilityState === "visible") {
-//           return;
-//         }
-        var title = "JaveScript Jeep";
-        icon = "image-url"
-        var body = "Message to be displayed";
-        var notification = new Notification('Title', { body, icon});
-        notification.onclick = () => {
-          notification.close();
-          window.parent.focus();
-        }
-      }
-
-      function requestAndShowPermission() {
-        Notification.requestPermission(function (permission) {
-          if (permission === "granted") {
-            showNotification();
-          }
-        });
-      }
-
-
-      //
     })
 
   </script>
@@ -502,6 +445,76 @@
       }
     }
   </script>
+   <script>
+    let permission = Notification.permission;
+    if(permission === "granted") {
+      let perm = true;
+    } else if(permission === "default"){
+      requestAndShowPermission();
+    } else {
+      alert("Allow Notification");
+    }
+
+    function showNotification(message) {
+      if(document.visibilityState === "visible") {
+        return;
+      }
+      var title = "Chat";
+      // icon = "image-url"
+      var body = message;
+      var notification = new Notification('Title', { body});
+      notification.onclick = () => {
+        notification.close();
+        window.parent.focus();
+      }
+    }
+
+    function requestAndShowPermission() {
+      Notification.requestPermission(function (permission) {
+        if (permission === "granted") {
+          showNotification();
+        }
+      });
+    }
+  </script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function scroll() {})
+    
+  
+    // THIS FUNCTION SHOULD SCROLL DOWN AUTOMATICALLY
+    let scrollingElement = (document.scrollingElement || document.body)
+    let msgH = document.querySelectorAll(".msg_history > div"), CurrentLen;
+    let init = () => {
+      CurrentLen = msgH.length;
+      
+    }
+    init();
+    let validatePosition = () => {
+      if (msgH.length === CurrentLen) {
+        msgH[msgH.length - 1].setAttribute("id", "last_message");
+        for (var i; i < msgH.length; i++) {
+          if (msgH[i].id === "last_message" && msgH[i] !== msgH.length - 1) {
+            msgH[i].removeAttribute("id");
+            msgH[msgH.length - 1].setAttribute("id", "last_message");
+            console.log(msgH[msgH.length - 1].setAttribute("id", "last_message"));
+          }
+        }
+      }
+    }
+    let scrollDown = () => {
+      // scrollingElement.scrollTop = scrollingElement.scrollHeight;
+      // $container.animate({ scrollTop: $container[0].scrollHeight }, "slow");
+      validatePosition();
+      location.href = "#last_message";
+      init();
+    }
+    scrollDown()
+
+
+
+</script>
+
 </body>
 
 </html>
