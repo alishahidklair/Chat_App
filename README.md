@@ -1,4 +1,4 @@
-# OUTDATED {THE BELOW WILL NOT RUN ANYMORE}
+# OUTDATED {WEB AND DESKTOP APP WILL NOT RUN ANYMORE - DOWNLOAD TO RUN ON LOCAL HOST}
 # A simple chat application using Flask and Fauna DB 
 
 * video demo: https://youtu.be/57NDn9VmX4Q
